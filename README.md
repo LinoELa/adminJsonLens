@@ -2,6 +2,18 @@
 
 `adminJsonLens` es la API backend del proyecto.
 
+## Puertos recomendados
+
+Para evitar conflictos en desarrollo, usa esta convención desde el inicio:
+
+- Frontend `JsonLens`: `http://localhost:5600`
+- Backend `adminJsonLens`: `http://localhost:5700`
+
+Regla práctica:
+
+- Frontend: `56xx`
+- Backend: `57xx`
+
 Su responsabilidad principal es gestionar la validación, el formateo, el análisis y la comparación de archivos JSON. Esta API actúa como la capa encargada de procesar la información y devolver resultados claros, estructurados y consumibles por el frontend.
 
 ## Funcionalidades previstas
@@ -32,13 +44,15 @@ El objetivo de `adminJsonLens` es proporcionar una base sólida para una herrami
 
 El proyecto se encuentra en una fase inicial de desarrollo.
 
-La primera meta es construir un MVP funcional que permita:
+Actualmente solo está instalada la dependencia `express` y todavía no hay scripts ni estructura base implementados dentro del repositorio.
 
-1. Recibir uno o varios documentos JSON
-2. Validarlos
-3. Formatearlos
-4. Analizar su estructura
-5. Compararlos y devolver diferencias básicas
+La siguiente meta razonable para el MVP del backend es:
+
+1. Definir la estructura inicial del proyecto
+2. Crear `app.js` y `server.js`
+3. Levantar la API en `http://localhost:5700`
+4. Recibir uno o varios documentos JSON
+5. Validarlos, analizarlos y compararlos
 
 ## Puesta en marcha
 
@@ -48,17 +62,15 @@ La primera meta es construir un MVP funcional que permita:
 npm install
 ```
 
-### Iniciar en desarrollo
+### Estado de arranque actual
 
-```bash
-npm run dev
-```
+Por ahora el proyecto no tiene scripts `dev` ni `start` definidos en `package.json`.
 
-### Iniciar en modo estándar
+Antes de poder arrancarlo conviene añadir:
 
-```bash
-npm start
-```
+- Un archivo de entrada para Express
+- La configuración del puerto `5700`
+- Los scripts de ejecución en `package.json`
 
 ## Estructura inicial recomendada
 
