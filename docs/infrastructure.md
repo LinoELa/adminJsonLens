@@ -1,25 +1,25 @@
 # Infraestructura de `adminJsonLens`
 
-> Mapa rapido del backend para consulta visual en preview.
+> Mapa rápido del backend para consulta visual.
 
 ## Resumen
 
-| Area                  | Detalle                                                    |
-| --------------------- | ---------------------------------------------------------- |
-| Rol                   | Backend/API del ecosistema `JsonLens`                      |
-| Stack base            | `Node.js`, `Express`, `JavaScript`                         |
-| Puerto recomendado    | `5600`                                                     |
-| Dependencia instalada | `express`                                                  |
-| Estado actual         | Repositorio base creado; MVP todavia en construccion       |
-| Tipo de repositorio   | Repositorio Git independiente dentro de `JSONLENS-PROJECT` |
+| Área                | Detalle                                                    |
+| ------------------- | ---------------------------------------------------------- |
+| Rol                 | Backend, API del ecosistema `JsonLens`                     |
+| Stack base          | `Node.js`, `Express`, `JavaScript`                         |
+| Puerto recomendado  | `5600`                                                     |
+| Dependencias base   | `express`                                                  |
+| Estado actual       | Repositorio base creado, MVP todavía en construcción       |
+| Tipo de repositorio | Repositorio Git independiente dentro de `JSONLENS-PROJECT` |
 
 ## Responsabilidad del backend
 
-- Recibir uno o varios documentos JSON desde el frontend.
-- Validar sintaxis y estructura.
-- Formatear contenido JSON cuando haga falta.
-- Analizar claves, tipos y organizacion del documento.
-- Comparar documentos y devolver diferencias legibles.
+* Recibir uno o varios documentos JSON desde el frontend.
+* Validar sintaxis y estructura.
+* Formatear contenido JSON cuando haga falta.
+* Analizar claves, tipos y organización del documento.
+* Comparar documentos y devolver diferencias legibles.
 
 ## Flujo esperado
 
@@ -35,17 +35,16 @@ JsonLens (frontend)
 
 ```text
 adminJsonLens/
-|-- controllers/      # reservado para controladores HTTP
-|-- core/             # reservado para logica de negocio
-|-- docs/             # documentacion tecnica
-|-- routes/           # reservado para definicion de endpoints
-|-- server/           # reservado para el arranque del servidor
-|-- node_modules/     # dependencias instaladas localmente
+|-- controllers/      # Reservado para controladores HTTP
+|-- core/             # Reservado para logica de negocio
+|-- docs/             # Documentacion tecnica
+|-- routes/           # Reservado para definicion de endpoints
+|-- server/           # Reservado para el arranque del servidor
+|-- node_modules/     # Dependencias instaladas localmente
 |-- .gitignore
 |-- README.md
 |-- package.json
-|-- package-lock.json
-`-- index.html
+`-- package-lock.json
 ```
 
 ## Estructura recomendada para el MVP
@@ -53,15 +52,15 @@ adminJsonLens/
 ```text
 adminJsonLens/
 |-- src/
-|   |-- app.js
-|   |-- server.js
-|   |-- controllers/
-|   |-- routes/
-|   |-- services/
-|   |-- utils/
-|   `-- middlewares/
-|-- docs/
-|-- .env.example
+|   |-- app.js            # Configuracion principal de Express
+|   |-- server.js         # Punto de entrada del servidor
+|   |-- controllers/      # Controladores de endpoints
+|   |-- routes/           # Definicion de rutas
+|   |-- services/         # Logica principal del procesamiento JSON
+|   |-- utils/            # Funciones auxiliares
+|   `-- middlewares/      # Middlewares de Express
+|-- docs/                 # Documentacion tecnica
+|-- .env.example          # Ejemplo de variables de entorno
 |-- package.json
 `-- README.md
 ```
@@ -69,38 +68,40 @@ adminJsonLens/
 ## Prioridades siguientes
 
 1. Crear `src/app.js` y `src/server.js`.
-2. Definir scripts `dev` y `start` en `package.json`.
+2. Definir los scripts `dev` y `start` en `package.json`.
 3. Exponer un endpoint de salud como `/health`.
 4. Preparar endpoints para validar, formatear y comparar JSON.
-5. Separar la logica reusable en `services/` y `utils/`.
+5. Separar la lógica reutilizable en `services/` y `utils/`.
 
-## Notas de coordinacion
+## Notas de coordinación
 
-- `JsonLens` puede trabajar en `http://localhost:5700`.
-- `adminJsonLens` puede trabajar en `http://localhost:5600`.
-- Este documento mezcla el estado actual del repositorio con la direccion recomendada para el siguiente paso del backend.
+* `JsonLens` puede trabajar en `http://localhost:5173`.
+* `adminJsonLens` puede trabajar en `http://localhost:5600`.
+* Este documento mezcla el estado actual del repositorio con la dirección recomendada para el siguiente paso del backend.
+
+## Arquitectura de referencia futura
 
 
 ```text
-ArquitectureaProject/
-├─ dist/                   # Código compilado o artefactos de despliegue
-├─ project/                # Documentación interna y notas del equipo
+ReferenceArchitecture/
+├─ dist/                   # Codigo compilado o artefactos de despliegue
+├─ project/                # Documentacion interna y notas del equipo
 │  ├─ docs/
 │  ├─ notes/
 │  └─ ...
-├─ src/                    # Código fuente principal
+├─ src/                    # Codigo fuente principal
 │  ├─ server.ts            # Punto de entrada del servidor
-│  ├─ app.ts               # Configuración de Express y middleware global
-│  ├─ config/              # Configuración y variables de entorno
+│  ├─ app.ts               # Configuracion de Express y middleware global
+│  ├─ config/              # Configuracion y variables de entorno
 │  │  ├─ index.ts
 │  │  └─ env.ts
-│  ├─ core/                # Lógica de negocio y servicios
+│  ├─ core/                # Logica de negocio y servicios
 │  │  ├─ user.service.ts
 │  │  └─ auth.service.ts
 │  ├─ repository/          # Acceso a datos y persistencia
 │  │  ├─ user.repository.ts
 │  │  └─ auth.repository.ts
-│  ├─ routes/              # Definición de rutas
+│  ├─ routes/              # Definicion de rutas
 │  │  ├─ auth.routes.ts
 │  │  ├─ users.routes.ts
 │  │  ├─ health.routes.ts
@@ -109,11 +110,11 @@ ArquitectureaProject/
 │  │  ├─ auth.controller.ts
 │  │  ├─ users.controller.ts
 │  │  └─ health.controller.ts
-│  ├─ middleware/          # Middleware global y específico
+│  ├─ middleware/          # Middleware global y especifico
 │  │  ├─ auth.middleware.ts
 │  │  └─ error.middleware.ts
-│  ├─ utils/               # Helpers y utilidades genéricas
-│  ├─ validators/          # Validación de requests
+│  ├─ utils/               # Helpers y utilidades genericas
+│  ├─ validators/          # Validacion de requests
 │  └─ types/               # Tipos globales y DTOs
 ├─ test/                   # Pruebas unitarias e integradas
 │  ├─ auth.test.ts
@@ -124,5 +125,4 @@ ArquitectureaProject/
 ├─ tsconfig.json
 ├─ tsconfig.build.json
 └─ nodemon.json
-
 ```

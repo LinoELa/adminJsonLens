@@ -1,29 +1,47 @@
-# ============================ Workspace ============================
+# ============================ Index ============================
 
-Workspace:
-  name: JSONLENS-PROJECT
-  repositories:
-    JsonLens:
-      path: ./JsonLens
-      role: frontend
-      stack: [React, Vite, JavaScript]
-    adminJsonLens:
-      path: ./adminJsonLens
-      role: backend
-      stack: [Node.js, Express, JavaScript]
+Index:
+  - Project
+  - Objectives
+  - Git-Flow
+  - Npm_Scripts
 
-# ============================ Management ===========================
+# ============================ Project ============================
 
-Management:
-  trello:
-    usage: Gestion del trabajo por fases con checklists.
-  notion:
-    usage: Documentacion, decisiones tecnicas y base de conocimiento.
-  github:
-    usage: Control de versiones y trabajo por ramas.
-    phase_rule: Cada fase del proyecto corresponde a una feature branch.
+Project:
+  name: JsonLens
+  role: frontend
+  repository: https://github.com/LinoELa/JsonLens.git
+  stack:
+    - React
+    - Vite
+    - JavaScript
 
-# ============================ Git Flow =============================
+  description: >
+    JsonLens es el frontend del proyecto.
+    Su funcion es permitir al usuario cargar, pegar, validar,
+    formatear, visualizar y comparar documentos JSON mediante
+    una interfaz clara, rapida y moderna.
+
+  next_setup_targets:
+    - Definir la estructura base del frontend.
+    - Crear componentes, pages, services, utils y styles.
+    - Configurar el puerto de desarrollo.
+    - Preparar la integracion con el backend adminJsonLens.
+
+# ============================ Objectives ============================
+
+Objectives:
+  - Construir una interfaz web para trabajar con documentos JSON.
+  - Permitir pegar o cargar archivos JSON.
+  - Validar si el JSON es correcto.
+  - Formatear JSON para mejorar su lectura.
+  - Visualizar la estructura del JSON de forma clara.
+  - Comparar dos documentos JSON.
+  - Mostrar diferencias estructurales entre JSON.
+  - Enviar datos al backend y mostrar los resultados procesados.
+
+# ============================ Git Flow ============================
 
 Git-Flow:
   applies_to: Cada repositorio por separado.
@@ -43,10 +61,11 @@ Git-Flow:
       role: integracion
       rules:
         - Todas las features nacen desde dev.
-        - Los bugfix tambien nacen desde dev.
+        - Los bugfix nacen desde dev.
         - Cuando dev esta estable se fusiona hacia main.
 
     feature:
+      info: "feature = fase del proyecto"
       pattern: feature/${NAME}
       source: dev
       target: dev
@@ -77,7 +96,7 @@ Git-Flow:
         - dev
       examples:
         - hotfix/security-error
-        - hotfix/api-crash
+        - hotfix/ui-crash
 
   commit_convention:
     format: "type: descripcion corta"
@@ -179,71 +198,44 @@ Git-Flow:
       steps:
         - git log --oneline --graph dev..main
 
-# ============================ Project Map ==========================
+# ============================ NPM Scripts ============================
 
-Project_Map:
-  JsonLens:
-    path: ./JsonLens
-    repository_type: git_independiente
-    role: frontend
-    stack:
-      - React
-      - Vite
-      - JavaScript
-    status: base inicial creada y MVP en desarrollo
-    objective:
-      - Pegar o cargar un JSON.
-      - Validarlo y formatearlo.
-      - Visualizar su estructura.
-      - Comparar documentos JSON y mostrar diferencias basicas.
-    branch_focus_examples:
-      - feature/1-setup-project
-      - feature/1.2-frontend-setup
-      - feature/2-json-validation
-      - feature/3-json-formatter
+Npm_Scripts:
+  development:
+    dev: vite # Inicia el servidor de desarrollo del frontend
+    start: vite # Alias de dev para mantener una convencion simple
+    preview: vite preview # Previsualiza la build generada en local
 
-  adminJsonLens:
-    path: ./adminJsonLens
-    repository_type: git_independiente
-    role: backend
-    stack:
-      - Node.js
-      - Express
-      - JavaScript
-    status: fase inicial; dependencia base instalada; scripts aun no definidos
-    objective:
-      - Definir la estructura inicial del proyecto.
-      - Crear app.js y server.js.
-      - Levantar la API.
-      - Recibir, validar, analizar y comparar JSON.
-    branch_focus_examples:
-      - feature/1-setup-project
-      - feature/1.3-backend-setup
-      - feature/2-json-validation
-      - feature/3-json-formatter
-    next_setup_targets:
-      - Agregar scripts dev y start en package.json.
-      - Crear src/controllers, src/routes, src/services, src/utils y src/middlewares.
-      - Configurar el puerto de desarrollo de la API.
+  build:
+    build: vite build # Compila la aplicacion para produccion
+    serve: vite preview # Sirve la build compilada en entorno local
+    clean: rimraf dist # Limpia la carpeta dist antes de una nueva build
 
-# ============================ NPM Scripts ==========================
+  testing:
+    test: vitest # Ejecuta los tests unitarios
+    test_watch: vitest --watch # Ejecuta tests en modo vigilancia
+    test_coverage: vitest run --coverage # Genera reporte de cobertura
+    test_e2e: playwright test # Ejecuta tests end to end si se usa Playwright
 
-Npm_scripts:
-  JsonLens:
-    package_json: ./JsonLens/package.json
-    available:
-      install: npm install
-      dev: npm run dev
-      build: npm run build
-      lint: npm run lint
-      preview: npm run preview
+  quality:
+    lint: eslint . --ext .js,.jsx # Analiza el codigo del frontend
+    lint_fix: eslint . --fix # Corrige automaticamente errores simples
+    format: prettier --write . # Formatea el codigo del proyecto
 
-  adminJsonLens:
-    package_json: ./adminJsonLens/package.json
-    available:
-      install: npm install
-    pending:
-      - npm run dev
-      - npm run start
+  dependencies:
+    deps_audit: npm audit # Revisa vulnerabilidades en dependencias
+    deps_update: npm-check -u # Actualiza dependencias interactivamente
+    deps_outdated: npm outdated # Lista dependencias desactualizadas
 
-# ================================================================
+  docs_and_analysis:
+    analyze: source-map-explorer dist/*.js # Analiza el tamaño del bundle generado
+    env: node -p "process.env" # Muestra variables de entorno disponibles
+
+  deploy:
+    deploy: gh-pages -d dist # Publica la aplicacion en GitHub Pages
+    vercel: vercel --prod # Despliega la aplicacion en Vercel
+    netlify: netlify deploy --prod # Despliega la aplicacion en Netlify
+
+  maintenance:
+    check: npm run lint && npm test # Ejecuta comprobaciones basicas antes de subir cambios
+    prepare: husky install # Inicializa Husky para hooks de Git
