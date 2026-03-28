@@ -12,6 +12,7 @@ coverage/
 *.tsbuildinfo
 
 # Variables de entorno y overrides por maquina
+*.temp
 .env
 .env.local
 .env.development.local

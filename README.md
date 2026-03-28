@@ -1,90 +1,84 @@
 # adminJsonLens
 
-`adminJsonLens` es la API backend del proyecto.
+Backend de `JsonLens` orientado al procesamiento de documentos JSON.
 
-## Puertos recomendados
+## Objetivo
 
-Para evitar conflictos en desarrollo, usa esta convención desde el inicio:
+`adminJsonLens` debe encargarse de:
 
-- Frontend `JsonLens`: `http://localhost:5600`
-- Backend `adminJsonLens`: `http://localhost:5700`
+- validar JSON
+- formatear JSON
+- analizar estructura
+- comparar documentos JSON
+- exponer informacion base del servicio
 
-Regla práctica:
+## Capacidades del producto
 
-- Frontend: `56xx`
-- Backend: `57xx`
+El sistema debe permitir:
 
-Su responsabilidad principal es gestionar la validación, el formateo, el análisis y la comparación de archivos JSON. Esta API actúa como la capa encargada de procesar la información y devolver resultados claros, estructurados y consumibles por el frontend.
+1. analizar la estructura completa de un JSON
+2. validar si un JSON es correcto o contiene errores de formato
+3. formatear JSON automaticamente para convertirlo en una version legible
+4. comparar varios JSON entre si
+5. detectar diferencias entre estructuras y valores
+6. identificar campos nuevos, eliminados o modificados
+7. mostrar similitudes entre documentos JSON
+8. visualizar la jerarquia de los datos de forma clara
 
-## Funcionalidades previstas
+La idea del producto es ofrecer una herramienta de apoyo para debugging, migraciones de datos y validacion de APIs.
 
-El backend está diseñado para cubrir las siguientes capacidades:
+## Stack actual
 
-- Validación de documentos JSON
-- Formateo automático de contenido JSON
-- Análisis estructural de documentos JSON
-- Comparación entre varios documentos JSON
-- Detección de diferencias de estructura y valores
-- Identificación de campos añadidos, eliminados o modificados
-- Detección de similitudes entre documentos JSON
+- `Node.js`
+- `Express`
+- `JavaScript`
+- `dotenv`
+- `pg`
 
-## Objetivo del proyecto
-
-El objetivo de `adminJsonLens` es proporcionar una base sólida para una herramienta moderna orientada al análisis y comparación de datos JSON. La API centraliza la lógica de procesamiento para facilitar la integración con la interfaz frontend y asegurar resultados consistentes.
-
-## Stack tecnológico
-
-- Node.js
-- Express
-- JavaScript
-- Ajv
-- jsondiffpatch
-
-## Estado actual
-
-El proyecto se encuentra en una fase inicial de desarrollo.
-
-Actualmente solo está instalada la dependencia `express` y todavía no hay scripts ni estructura base implementados dentro del repositorio.
-
-La siguiente meta razonable para el MVP del backend es:
-
-1. Definir la estructura inicial del proyecto
-2. Crear `app.js` y `server.js`
-3. Levantar la API en `http://localhost:5700`
-4. Recibir uno o varios documentos JSON
-5. Validarlos, analizarlos y compararlos
-
-## Puesta en marcha
-
-### Instalar dependencias
+## Scripts actuales
 
 ```bash
-npm install
+npm run dev
+npm start
 ```
 
-### Estado de arranque actual
+Los scripts actuales del backend son:
 
-Por ahora el proyecto no tiene scripts `dev` ni `start` definidos en `package.json`.
+- `dev`: arranca `src/server.js`
+- `start`: arranca `src/server.js`
 
-Antes de poder arrancarlo conviene añadir:
+## Puerto recomendado
 
-- Un archivo de entrada para Express
-- La configuración del puerto `5700`
-- Los scripts de ejecución en `package.json`
+- frontend `JsonLens`: `5600`
+- backend `adminJsonLens`: `5700`
 
-## Estructura inicial recomendada
+## Estado del repo
 
-```bash
-src/
-  controllers/
-  routes/
-  services/
-  utils/
-  middlewares/
-  app.js
-  server.js
-```
+El proyecto ya tiene una base funcional con:
 
-## Relación con el proyecto
+- `src/app.js`
+- `src/server.js`
+- `src/config/config.index.js`
+- registro modular en `src/modules/`
 
-`adminJsonLens` forma parte del ecosistema `JsonLens` y proporciona los servicios backend necesarios para soportar las funcionalidades de validación, análisis y comparación disponibles en el frontend.
+## Direccion de arquitectura
+
+La arquitectura objetivo del proyecto es una arquitectura modular MVP con dos bloques principales:
+
+- `core`
+- `json-processing`
+
+La referencia principal vive en:
+
+- [`docs/Architecture/modular-mvp-architecture.md`](./docs/Architecture/modular-mvp-architecture.md)
+- [`docs/Reference/nomenclatura.md`](./docs/Reference/nomenclatura.md)
+- [`docs/Guides/@Guides.md`](./docs/Guides/@Guides.md)
+
+## Regla de nombres
+
+- nombres tecnicos en ingles
+- comentarios y documentacion interna en espanol
+
+## Nota importante
+
+Si encuentras documentacion o nombres heredados de otro backend, no deben tomarse como referencia valida hasta que sean adaptados a `adminJsonLens`.
