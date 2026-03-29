@@ -45,6 +45,25 @@ Si haces `prepara todo`, tambien tienes que revisar esto:
 
 La referencia concreta de esta regla esta en [`nomenclatura.md`](./nomenclatura.md).
 
+
+## Referencia madre del proyecto
+
+Si haces `prepara todo`, tambien tienes que revisar si el cambio toca la vision general del producto.
+- Si lo hace aviamelo y tengo que confirmar antes de seguir.
+
+El archivo `@project.md` debe funcionar como referencia madre del proyecto y dejar claro:
+
+- vision del producto
+- problema que resuelve
+- rol del frontend y del backend
+- MVP real
+- roadmap inicial con el orden recomendado
+
+Si alguno de esos puntos cambia, la documentacion tambien debe actualizarse ahi.
+
+La referencia concreta de esta regla esta en [`@project.md`](../@project.md).
+
+
 ## Estructura de comentarios del proyecto
 
 La idea no es comentar por comentar.
