@@ -1,4 +1,4 @@
-const { queryRepository } = require("./repository");
+const { queryRepository } = require("../repository.module");
 
 async function createUsersTableRepository() {
   // Ensure users table exists.

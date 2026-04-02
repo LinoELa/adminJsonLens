@@ -4,7 +4,7 @@ Esta carpeta centraliza la configuracion del backend y la carga de variables de 
 
 ## Estado actual
 
-- `config.index.js`: carga `.env`, expone `PORT` y crea la conexion `db` con `pg` cuando hay configuracion completa.
+- `config.js`: carga `.env`, expone `PORT` y crea la conexion `db` con `pg` cuando hay configuracion completa.
 
 ## Nota importante
 

@@ -1,4 +1,4 @@
-const { queryRepository } = require("../../../repository/modules/repository");
+const { queryRepository } = require("../../../repository/repository.module");
 
 async function getHealthService() {
   const result = await queryRepository("SELECT NOW() AS current_time");
