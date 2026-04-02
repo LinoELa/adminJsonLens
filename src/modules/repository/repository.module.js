@@ -1,6 +1,4 @@
-const moduleRepository = require("./modules/repository");
-const userRepository = require("./modules/user.repository");
-const { db } = require("../../../config/config.index");
+const { db } = require("../../config/config");
 
 // Shared query runner.
 async function queryRepository(text, params = []) {
@@ -8,8 +6,7 @@ async function queryRepository(text, params = []) {
 }
 
 const repositoryModule = {
-  modules: [userRepository],
-  repository: moduleRepository,
+  modules: [],
 };
 
 module.exports = {
