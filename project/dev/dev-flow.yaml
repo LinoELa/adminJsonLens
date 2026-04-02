@@ -140,4 +140,79 @@ HTTP_Status:
     uses_now: [200, 400, 404, 500]
     later_possible: [201, 401, 403, 422]
 
-# ================================================================
+# ======================= VSCode Performance ========================
+
+VSCode_Performance:
+  objective:
+    - Reducir consumo de CPU, RAM y disco en VS Code.
+    - Evitar lentitud cuando hay muchas extensiones activas.
+
+  settings_scope:
+    workspace_root:
+      file: ./.vscode/settings.json
+      note: Aplica a todas las carpetas si abres la raiz del workspace.
+    per_repository:
+      file: ./.vscode/settings.json
+      note: Crear este archivo en cada repo si se abre por separado.
+
+  recommended_settings:
+    files_watcher_exclude:
+      - "**/.git/objects/**"
+      - "**/.git/subtree-cache/**"
+      - "**/node_modules/**"
+      - "**/dist/**"
+      - "**/build/**"
+      - "**/coverage/**"
+      - "**/.next/**"
+      - "**/.cache/**"
+      - "**/.turbo/**"
+      - "**/.vite/**"
+      - "**/.vercel/**"
+    search_exclude:
+      - "**/node_modules"
+      - "**/dist"
+      - "**/build"
+      - "**/coverage"
+      - "**/.next"
+      - "**/.cache"
+      - "**/.turbo"
+      - "**/.vite"
+    editor:
+      eslint_run: onSave
+      format_on_type: false
+      npm_auto_detect: off
+      typescript_automatic_type_acquisition: false
+
+  extension_bisect:
+    where:
+      - Abrir Command Palette: Ctrl+Shift+P
+      - Ejecutar: Extensions: Start Extension Bisect
+    flow:
+      - Probar si la lentitud sigue.
+      - Responder "Yes" si sigue lento.
+      - Responder "No" si mejora.
+      - Repetir hasta identificar la extension conflictiva.
+
+  ai_and_tools_policy:
+    ai_extensions:
+      - Usar una sola extension de IA activa para trabajo diario.
+    chat_tools_keep_enabled:
+      - read
+      - search
+      - editFiles
+      - execute
+    chat_tools_disable_by_default:
+      - browser
+      - openBrowserPage
+      - web
+      - todo
+      - createJupyterNotebook
+      - editNotebook
+      - GitKraken
+      - Database Client
+      - Prisma
+
+  validation(ctrl+shift+p):
+    - Ejecutar: Developer: Reload Window
+    - Ejecutar: Help: Open Process Explorer
+    - Verificar durante 5-10 minutos que Extension Host se mantiene estable.

@@ -1,5 +1,5 @@
-const { getUsersRepository } = require("../../../repository/modules/user.repository");
-const { getUsersEntity } = require("../user-entity/user.entity");
+import { getUsersRepository } from "../../../repository/modules/user.repository.js";
+import { getUsersEntity } from "../user-entity/user.entity.js";
 
 async function getUsersService() {
   const usersRepository = await getUsersRepository();
@@ -14,6 +14,6 @@ async function getUsersService() {
   };
 }
 
-module.exports = {
+export {
   getUsersService,
 };

@@ -1,0 +1,82 @@
+version: 1
+name: flujo-rendimiento-vscode
+owner: adminJsonLens
+date_updated: 2026-04-02
+
+objetivo:
+  - Bajar consumo de CPU, RAM y disco en VS Code.
+  - Evitar lentitud cuando hay muchas extensiones activas.
+
+hecho_por_codex:
+  - accion: crear_settings_global_workspace
+    archivo: C:/Users/Pc-lino-ela/Documents/Ela/DEVELOPER/JSONLENS-PROJECT/.vscode/settings.json
+    estado: listo
+    detalle:
+      - Excluye carpetas pesadas del indexado (node_modules, dist, build, coverage, cache).
+      - Excluye esas carpetas de busqueda.
+      - eslint queda en onSave (no en tiempo real por tecla).
+      - formatOnType desactivado.
+      - npm.autoDetect desactivado.
+      - typescript automatic type acquisition desactivado.
+
+  - accion: aplicar_settings_por_repositorio
+    estado: listo
+    archivos:
+      - C:/Users/Pc-lino-ela/Documents/Ela/DEVELOPER/JSONLENS-PROJECT/adminJsonLens/.vscode/settings.json
+      - C:/Users/Pc-lino-ela/Documents/Ela/DEVELOPER/JSONLENS-PROJECT/JsonLens/.vscode/settings.json
+
+pasos_que_haces_en_vscode:
+  extension_bisect:
+    donde:
+      - Abrir paleta de comandos con Ctrl+Shift+P
+      - Ejecutar: Extensions: Start Extension Bisect
+    como_funciona:
+      - VS Code desactiva mitad de extensiones.
+      - Probar si sigue lento.
+      - Responder Yes si sigue lento.
+      - Responder No si mejora.
+      - Repetir hasta detectar extension conflictiva.
+
+  herramientas_chat_recomendadas:
+    dejar_activas:
+      - read
+      - search
+      - editFiles
+      - execute
+      - createFile (opcional)
+      - createDirectory (opcional)
+    dejar_desactivadas_por_defecto:
+      - browser
+      - openBrowserPage
+      - web
+      - todo
+      - createJupyterNotebook
+      - editNotebook
+      - GitKraken
+      - Database Client
+      - Prisma
+
+  politica_ia:
+    regla:
+      - Usar una sola extension IA activa para el dia a dia.
+    ejemplo:
+      - Copilot o OpenAI Chat, pero no las dos a maxima carga al mismo tiempo.
+
+validacion_final:
+  - Ejecutar: Developer: Reload Window
+  - Ejecutar: Help: Open Process Explorer
+  - Revisar 5 a 10 minutos que Extension Host no se dispare.
+
+aplicacion_en_todos_los_proyectos:
+  si_abres_la_raiz_del_workspace:
+    obligatorio: no
+    motivo: el .vscode/settings.json de la raiz ya aplica a todas las carpetas del workspace abierto.
+  si_abres_cada_repo_por_separado:
+    obligatorio: ya_hecho
+    motivo: ya existe .vscode/settings.json en adminJsonLens y en JsonLens.
+  si_creas_un_proyecto_nuevo:
+    pasos:
+      - Copiar este mismo .vscode/settings.json al nuevo repo.
+      - Hacer Reload Window en VS Code.
+  control_rapido:
+    - Si vuelve la lentitud, correr Extension Bisect otra vez.

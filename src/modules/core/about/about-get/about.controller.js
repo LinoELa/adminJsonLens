@@ -1,5 +1,5 @@
-const express = require("express");
-const { getAboutService } = require("./about.service");
+import express from "express";
+import { getAboutService } from "./about.service.js";
 
 const getAboutController = express.Router();
 
@@ -8,4 +8,4 @@ getAboutController.get("/about", (req, res) => {
   res.send(data);
 });
 
-module.exports = getAboutController;
+export default getAboutController;

@@ -1,16 +1,15 @@
-const { aboutModule } = require("./about/about.module");
-const { healthModule } = require("./health/health.module");
-const { usersModule } = require("./users/users.module");
+import { aboutModule } from "./about/about.module.js";
+import { usersModule } from "./users/users.module.js";
 
 // Core modules.
 const coreModule = {
   modules: [
-    healthModule,
+
     aboutModule,
     usersModule,
   ],
 };
 
-module.exports = {
+export {
   coreModule,
 };

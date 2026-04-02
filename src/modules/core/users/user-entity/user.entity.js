@@ -12,7 +12,7 @@ function getUsersEntity(rows = []) {
   return rows.map(userEntity);
 }
 
-module.exports = {
+export {
   userEntity,
   getUsersEntity,
 };

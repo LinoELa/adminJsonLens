@@ -1,5 +1,5 @@
-const express = require("express");
-const { getUsersService } = require("./users.service");
+import express from "express";
+import { getUsersService } from "./users.service.js";
 
 const getUsersController = express.Router();
 
@@ -15,4 +15,4 @@ getUsersController.get("/users", async (req, res) => {
   }
 });
 
-module.exports = getUsersController;
+export default getUsersController;

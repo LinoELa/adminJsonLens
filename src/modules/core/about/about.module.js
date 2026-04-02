@@ -1,11 +1,11 @@
-const getAboutController = require("./about-get/about.controller");
-const { getAboutService } = require("./about-get/about.service");
+import getAboutController from "./about-get/about.controller.js";
+import { getAboutService } from "./about-get/about.service.js";
 
 const aboutModule = {
   controller: getAboutController,
   service: getAboutService,
 };
 
-module.exports = {
+export {
   aboutModule,
 };

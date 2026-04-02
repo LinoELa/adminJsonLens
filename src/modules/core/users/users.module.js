@@ -1,11 +1,11 @@
-const getUsersController = require("./users-get/users.controller");
-const { getUsersService } = require("./users-get/users.service");
+import getUsersController from "./users-get/users.controller.js";
+import { getUsersService } from "./users-get/users.service.js";
 
 const usersModule = {
   controller: getUsersController,
   service: getUsersService,
 };
 
-module.exports = {
+export {
   usersModule,
 };

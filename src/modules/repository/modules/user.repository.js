@@ -1,4 +1,4 @@
-const { queryRepository } = require("../repository.module");
+import { queryRepository } from "../repository.module.js";
 
 async function createUsersTableRepository() {
   // Ensure users table exists.
@@ -26,7 +26,7 @@ async function getUsersRepository() {
   return result.rows;
 }
 
-module.exports = {
+export {
   createUsersTableRepository,
   getUsersRepository,
 };

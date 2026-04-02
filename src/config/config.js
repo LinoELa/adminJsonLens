@@ -1,26 +1,57 @@
-require("dotenv").config();
-const { Pool } = require("pg");
+// ============================== IMPORTS =====================================
 
-const PORT = Number(process.env.PORT) || 5700;
-const DB_HOST = process.env.DB_HOST || "";
-const DB_PORT = Number(process.env.DB_PORT) || 0;
-const DB_USER = process.env.DB_USER || "";
-const DB_PASSWORD = process.env.DB_PASSWORD || "";
-const DB_NAME = process.env.DB_NAME || "";
+import "dotenv/config.js";
 
-const hasDbConfig = Boolean(DB_HOST && DB_PORT && DB_USER && DB_PASSWORD && DB_NAME);
+// ============================ RESPOSABILIDADES ===============================
+/**
+ * @CONFIG - Carga de variables de entorno y configuración global
+ *
+ * Responsabilidades:
+ * - Cargar variables de .env
+ * - Exportar constantes de configuración (PORT, NODE_ENV, etc.)
+ * - Definir y exportar opciones CORS con validación de dominios
+ */
 
-const db = hasDbConfig
-  ? new Pool({
-      host: DB_HOST,
-      port: DB_PORT,
-      user: DB_USER,
-      password: DB_PASSWORD,
-      database: DB_NAME,
-    })
-  : null;
+// ============================ CARGAR VARIABLES DE ENTORNOS  ===============================
 
-module.exports = {
-  PORT,
-  db,
+// Carga las variables de entorno desde .env y las asigna a constantes.
+export const {
+  APP_VERSION = "0.1",
+  NODE_ENV = "development",
+  PORT = 5700,
+  DB_USER,
+  DB_PASSWORD,
+} = process.env;
+
+// CORS options con validación de dominios específicos
+// ============================== CORS  =====================
+
+export const corsOptions = {
+  origin: (origin, callback) => {
+    // Lista de orígenes permitidos
+    const allowedOrigins = ["http://127.0.0.1:5600", "http://localhost:5600"];
+
+    // Permitir localhost con puerto dinámico (ej: Vite dev server)
+    if (origin?.endsWith("127.0.0.1:5600")) {
+      callback(null, true);
+      return;
+    }
+
+    // Valida y permite localhost con puerto 5600 (Vite dev server)
+    if (origin?.endsWith("localhost:5600")) {
+      callback(null, true);
+      return;
+    }
+
+    // Valida otros orígenes permitidos
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+      return;
+    }
+    // Rechaza otros orígenes
+    callback(null, false);
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  allowedHeaders: ["Content-Type", "Authorization", "Accept", "x-tenant-id"],
+  credentials: true,
 };

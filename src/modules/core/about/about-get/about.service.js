@@ -13,6 +13,6 @@ function getAboutService() {
   };
 }
 
-module.exports = {
+export {
   getAboutService,
 };

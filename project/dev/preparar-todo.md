@@ -105,14 +105,20 @@ Regla de alcance:
 - Este formato aplica por igual a frontend y backend.
 - Si un archivo es pequeno, se puede simplificar, pero mantener la misma idea.
 
-### Estructura definida
+### ESTRUCTUREA COMENTARIOS
 
-```text
+- Linea de separacion con `// ======================= ... =======================`
+- Bloques de comentarios con JSDoc explicando intencion y contexto
+- Comentarios de linea solo para aclarar pasos importantes, no para explicar cada linea de codigo
+- Usar etiquetas de contexto como @ROUTER, @SERVICE, @CONTROLLER para marcar el rol del archivo
+- Mantener un estilo visual consistente en todo el proyecto para facilitar la lectura y ubicacion de secciones importantes
+
+```js
 // ======================= IMPORTS =========================================
 import express from "express";
 import { validateRequest } from "../../middlewares/validateRequest.js";
 
-// ======================= EXPRESS ROUTER ==================================
+// ======================= NOTES ==================================
 
 /**
  * - Define las rutas de autenticacion.
@@ -124,6 +130,7 @@ import { validateRequest } from "../../middlewares/validateRequest.js";
  * @ROUTER | Express Router
  */
 
+// ======================= EXPRESS ROUTER ==================================
 const router = express.Router();
 
 // ======================= AUTHENTICATION ROUTES ============================
