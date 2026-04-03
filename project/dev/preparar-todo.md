@@ -156,6 +156,32 @@ router.post("/logout", logoutController);
 export default router;
 ```
 
+## Seguridad npm obligatoria
+
+En este proyecto, "prepara todo" tambien incluye asegurar la configuracion de npm a nivel de proyecto.
+
+Reglas obligatorias:
+
+- crear `.npmrc` en la raiz del proyecto, al lado de `package.json`
+- mantener como minimo:
+  - `ignore-scripts=true`
+- aplicar endurecimiento adicional recomendado:
+  - `audit=true`
+  - `audit-level=high`
+  - `save-exact=true`
+  - `cache=.npm-cache`
+- crear la carpeta local `.npm-cache/`
+- agregar `.npm-cache/` en `.gitignore`
+- aplicar exactamente la misma politica tambien en `JsonLens`
+
+Contenido base obligatorio en `.npmrc`:
+
+```ini
+# Seguridad del proyecto:
+# evita ejecutar scripts automaticos al instalar dependencias
+ignore-scripts=true
+```
+
 ## Idea principal
 
 prepara todo significa:

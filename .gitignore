@@ -8,6 +8,7 @@ coverage/
 
 # Caches y metadatos de herramientas locales
 .cache/
+.npm-cache/
 .eslintcache
 *.tsbuildinfo
 
